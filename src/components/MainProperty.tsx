@@ -4,7 +4,7 @@ import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calend
 
 export const MainProperty = () => {
   const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
-  const features = ["Acabamento de alto padrão", "Lazer completo com piscina e sauna", "Localização privilegiada", "Varanda gourmet com vista para o mar"];
+  const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
 
   return (
     <section id="main-property" className="py-16 px-4 bg-gray-50">
