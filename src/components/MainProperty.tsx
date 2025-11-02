@@ -30,7 +30,7 @@ export const MainProperty = () => {
             <div className="p-2 rounded-lg bg-gray-100"><BedDouble className="mx-auto mb-1" /> 3 Quartos</div>
             <div className="p-2 rounded-lg bg-gray-100"><Bath className="mx-auto mb-1" /> 1 Suíte</div>
             <div className="p-2 rounded-lg bg-gray-100"><Car className="mx-auto mb-1" /> 2 Vagas</div>
-            <div className="p-2 rounded-lg bg-gray-100"><Ruler className="mx-auto mb-1" /> 140 m²</div>
+            <div className="p-2 rounded-lg bg-gray-100"><Ruler className="mx-auto mb-1" /> 120 m²</div>
           </div>
 
           <h3 className="font-bold text-xl mb-3">Diferenciais</h3>
