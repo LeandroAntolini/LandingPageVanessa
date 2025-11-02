@@ -7,13 +7,25 @@ export const MainProperty = () => {
   const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
   
   const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+  
   const carouselImages = [
-    `${supabaseBaseUrl}/main-property-1.jpg`,
-    `${supabaseBaseUrl}/main-property-2.jpg`,
-    `${supabaseBaseUrl}/main-property-3.jpg`,
-    `${supabaseBaseUrl}/main-property-4.jpg`,
-    `${supabaseBaseUrl}/main-property-5.jpg`,
+    { src: `${supabaseBaseUrl}/CET01.jpg`, title: "Sala" },
+    { src: `${supabaseBaseUrl}/CET02.jpg`, title: "Sala" },
+    { src: `${supabaseBaseUrl}/CET03.jpg`, title: "Varanda" },
+    { src: `${supabaseBaseUrl}/CET04.jpg`, title: "Cozinha" },
+    { src: `${supabaseBaseUrl}/CET05.jpg`, title: "Homeoffice" },
+    { src: `${supabaseBaseUrl}/CET06.jpg`, title: "Suíte" },
+    { src: `${supabaseBaseUrl}/CET07.jpg`, title: "Banheiro suíte" },
+    { src: `${supabaseBaseUrl}/CET08.jpg`, title: "Quarto 1" },
+    { src: `${supabaseBaseUrl}/CET09.jpg`, title: "Quarto 2" },
+    { src: `${supabaseBaseUrl}/CET10.jpg`, title: "Banheiro social" },
+    { src: `${supabaseBaseUrl}/CET11.jpg`, title: "Piscina" },
+    { src: `${supabaseBaseUrl}/CET12.jpg`, title: "Academia" },
+    { src: `${supabaseBaseUrl}/CET13.jpg`, title: "Academia" },
+    { src: `${supabaseBaseUrl}/CET14.jpg`, title: "Quadra" },
+    { src: `${supabaseBaseUrl}/CET15.jpg`, title: "Churrasqueira" },
   ];
+
   const mapImageUrl = `${supabaseBaseUrl}/map-location.png`;
   const mapLocationLink = "https://maps.app.goo.gl/818LZ2xZ8nxzFepP7";
 
@@ -23,9 +35,14 @@ export const MainProperty = () => {
         <div>
           <Carousel className="w-full">
             <CarouselContent>
-              {carouselImages.map((src, index) => (
+              {carouselImages.map((image, index) => (
                 <CarouselItem key={index}>
-                  <img src={src} alt={`Foto do imóvel ${index + 1}`} className="w-full h-auto object-cover rounded-lg" />
+                  <div className="relative">
+                    <img src={image.src} alt={image.title} className="w-full h-auto object-cover rounded-lg" />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center rounded-b-lg">
+                      <p className="font-semibold text-sm">{image.title}</p>
+                    </div>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
