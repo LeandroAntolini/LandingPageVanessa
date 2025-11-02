@@ -3,7 +3,7 @@ import { ArrowDown } from "lucide-react";
 
 export const Hero = () => {
   const propertyTitle = "Seu Novo Lar na Praia de Itaparica";
-  const supabaseImageUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images/20250829_144347.jpg";
+  const supabaseImageUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images/hero.jpg";
 
   return (
     <section className="relative h-[60vh] min-h-[400px] bg-cover bg-center text-white flex items-center justify-center" style={{ backgroundImage: `url('${supabaseImageUrl}')` }}>
