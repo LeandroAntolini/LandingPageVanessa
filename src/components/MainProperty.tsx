@@ -3,7 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calendar } from "lucide-react";
 
 export const MainProperty = () => {
-  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia da Costa.`;
+  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
   const features = ["Acabamento de alto padrão", "Lazer completo com piscina e sauna", "Localização privilegiada", "Varanda gourmet com vista para o mar"];
 
   return (
@@ -23,7 +23,7 @@ export const MainProperty = () => {
           </Carousel>
         </div>
         <div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Apartamento na Praia da Costa</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Apartamento na Praia de Itaparica</h2>
           <p className="text-gray-600 mb-4 text-lg">A partir de <span className="text-teal-500 font-bold">R$ 1.200.000,00</span></p>
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
