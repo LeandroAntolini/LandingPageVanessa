@@ -28,7 +28,7 @@ export const MainProperty = () => {
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
             <div className="p-2 rounded-lg bg-gray-100"><BedDouble className="mx-auto mb-1" /> 3 Quartos</div>
-            <div className="p-2 rounded-lg bg-gray-100"><Bath className="mx-auto mb-1" /> 2 Suítes</div>
+            <div className="p-2 rounded-lg bg-gray-100"><Bath className="mx-auto mb-1" /> 1 Suíte</div>
             <div className="p-2 rounded-lg bg-gray-100"><Car className="mx-auto mb-1" /> 2 Vagas</div>
             <div className="p-2 rounded-lg bg-gray-100"><Ruler className="mx-auto mb-1" /> 140 m²</div>
           </div>
