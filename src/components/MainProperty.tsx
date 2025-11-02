@@ -15,6 +15,7 @@ export const MainProperty = () => {
     `${supabaseBaseUrl}/main-property-5.jpg`,
   ];
   const mapImageUrl = `${supabaseBaseUrl}/map-location.png`;
+  const mapLocationLink = "https://maps.app.goo.gl/818LZ2xZ8nxzFepP7";
 
   return (
     <section id="main-property" className="py-16 px-4 bg-gray-50">
@@ -52,7 +53,9 @@ export const MainProperty = () => {
 
           <div className="mb-6">
             <h3 className="font-bold text-xl mb-3 flex items-center"><MapPin className="h-5 w-5 mr-2 text-teal-500" /> Localização</h3>
-            <img src={mapImageUrl} alt="Mapa da localização" className="rounded-lg w-full h-auto" />
+            <a href={mapLocationLink} target="_blank" rel="noopener noreferrer">
+              <img src={mapImageUrl} alt="Mapa da localização" className="rounded-lg w-full h-auto cursor-pointer hover:opacity-80 transition-opacity" />
+            </a>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
