@@ -5,6 +5,16 @@ import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calend
 export const MainProperty = () => {
   const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
   const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
+  
+  const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+  const carouselImages = [
+    `${supabaseBaseUrl}/main-property-1.jpg`,
+    `${supabaseBaseUrl}/main-property-2.jpg`,
+    `${supabaseBaseUrl}/main-property-3.jpg`,
+    `${supabaseBaseUrl}/main-property-4.jpg`,
+    `${supabaseBaseUrl}/main-property-5.jpg`,
+  ];
+  const mapImageUrl = `${supabaseBaseUrl}/map-location.png`;
 
   return (
     <section id="main-property" className="py-16 px-4 bg-gray-50">
@@ -12,9 +22,9 @@ export const MainProperty = () => {
         <div>
           <Carousel className="w-full">
             <CarouselContent>
-              {Array.from({ length: 5 }).map((_, index) => (
+              {carouselImages.map((src, index) => (
                 <CarouselItem key={index}>
-                  <img src={`https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=${index}`} alt={`Foto do imóvel ${index + 1}`} className="w-full h-auto object-cover rounded-lg" />
+                  <img src={src} alt={`Foto do imóvel ${index + 1}`} className="w-full h-auto object-cover rounded-lg" />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -42,7 +52,7 @@ export const MainProperty = () => {
 
           <div className="mb-6">
             <h3 className="font-bold text-xl mb-3 flex items-center"><MapPin className="h-5 w-5 mr-2 text-teal-500" /> Localização</h3>
-            <img src="https://i.imgur.com/Yq3s2aE.png" alt="Mapa da localização" className="rounded-lg w-full h-auto" />
+            <img src={mapImageUrl} alt="Mapa da localização" className="rounded-lg w-full h-auto" />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">

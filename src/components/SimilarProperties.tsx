@@ -1,8 +1,10 @@
 import { PropertyCard } from "./PropertyCard";
 
+const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+
 const similarPropertiesData = [
-  { image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&auto=format&fit=crop', price: 'R$ 980.000', neighborhood: 'Itapuã', title: 'Cobertura Duplex' },
-  { image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop', price: 'R$ 1.500.000', neighborhood: 'Praia da Costa', title: 'Frente Mar 4 Quartos' },
+  { image: `${supabaseBaseUrl}/similar-property-1.jpg`, price: 'R$ 980.000', neighborhood: 'Itapuã', title: 'Cobertura Duplex' },
+  { image: `${supabaseBaseUrl}/similar-property-2.jpg`, price: 'R$ 1.500.000', neighborhood: 'Praia da Costa', title: 'Frente Mar 4 Quartos' },
 ];
 
 export const SimilarProperties = () => {
