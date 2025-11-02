@@ -24,7 +24,7 @@ export const MainProperty = () => {
         </div>
         <div>
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Apartamento na Praia de Itaparica</h2>
-          <p className="text-gray-600 mb-4 text-lg">A partir de <span className="text-teal-500 font-bold">R$ 1.200.000,00</span></p>
+          <p className="text-gray-600 mb-4 text-lg">Valor <span className="text-teal-500 font-bold">R$ 1.200.000,00</span></p>
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
             <div className="p-2 rounded-lg bg-gray-100"><BedDouble className="mx-auto mb-1" /> 3 Quartos</div>
