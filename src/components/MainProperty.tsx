@@ -1,69 +1,74 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Bed, Bath, Car, Ruler } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calendar } from "lucide-react";
 
 export const MainProperty = () => {
-  const propertyDetails = {
-    title: "Apartamento de 2 Quartos com Suíte na Praia de Itaparica",
-    location: "Rua Deolindo Perim, 25, Praia de Itaparica, Vila Velha, ES",
-    price: "R$ 450.000,00",
-    condoFee: "R$ 350,00",
-    features: [
-      { icon: <Bed className="h-5 w-5 text-primary" />, label: "2 Quartos (1 Suíte)" },
-      { icon: <Bath className="h-5 w-5 text-primary" />, label: "2 Banheiros" },
-      { icon: <Car className="h-5 w-5 text-primary" />, label: "1 Vaga de Garagem" },
-      { icon: <Ruler className="h-5 w-5 text-primary" />, label: "65m²" },
-    ],
-    tags: ["Lazer Completo", "Portaria 24h", "Frente para o Mar"],
-  };
-
-  const address = "Rua Deolindo Perim, 25, Praia de Itaparica, Vila Velha, ES";
-  const mapLocationLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-  const mapImageUrl = "/placeholder.svg"; // Using a generic placeholder image
+  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
+  const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
+  
+  const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+  const carouselImages = [
+    `${supabaseBaseUrl}/main-property-1.jpg`,
+    `${supabaseBaseUrl}/main-property-2.jpg`,
+    `${supabaseBaseUrl}/main-property-3.jpg`,
+    `${supabaseBaseUrl}/main-property-4.jpg`,
+    `${supabaseBaseUrl}/main-property-5.jpg`,
+  ];
+  const mapImageUrl = `${supabaseBaseUrl}/map-location.png`;
+  const mapLocationLink = "https://maps.app.goo.gl/818LZ2xZ8nxzFepP7";
 
   return (
-    <section id="main-property" className="py-12 md:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <Card className="overflow-hidden shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold text-gray-800">{propertyDetails.title}</CardTitle>
-            <div className="flex items-center text-gray-600 mt-2">
-              <MapPin className="h-5 w-5 mr-2" />
-              <span>{propertyDetails.location}</span>
-            </div>
-          </CardHeader>
-          <CardContent className="grid md:grid-cols-2 gap-8 p-6">
-            <div>
-              <h3 className="text-2xl font-semibold text-primary mb-4">{propertyDetails.price}</h3>
-              <p className="text-gray-600 mb-6">Condomínio: {propertyDetails.condoFee}</p>
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                {propertyDetails.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    {feature.icon}
-                    <span className="text-gray-700">{feature.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {propertyDetails.tags.map((tag, index) => (
-                  <Badge key={index} variant="secondary">{tag}</Badge>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-xl font-semibold">Localização</h4>
-              <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border">
-                <a href={mapLocationLink} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={mapImageUrl}
-                    alt="Mapa da localização"
-                    className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
-                  />
-                </a>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+    <section id="main-property" className="py-16 px-4 bg-gray-50">
+      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {carouselImages.map((src, index) => (
+                <CarouselItem key={index}>
+                  <img src={src} alt={`Foto do imóvel ${index + 1}`} className="w-full h-auto object-cover rounded-lg" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Apartamento na Praia de Itaparica</h2>
+          <p className="text-gray-600 mb-4 text-lg">Valor <span className="text-teal-500 font-bold">R$ 1.200.000,00</span></p>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
+            <div className="p-2 rounded-lg bg-gray-100"><BedDouble className="mx-auto mb-1" /> 3 Quartos</div>
+            <div className="p-2 rounded-lg bg-gray-100"><Bath className="mx-auto mb-1" /> 1 Suíte</div>
+            <div className="p-2 rounded-lg bg-gray-100"><Car className="mx-auto mb-1" /> 2 Vagas</div>
+            <div className="p-2 rounded-lg bg-gray-100"><Ruler className="mx-auto mb-1" /> 120 m²</div>
+          </div>
+
+          <h3 className="font-bold text-xl mb-3">Diferenciais</h3>
+          <ul className="space-y-2 mb-6">
+            {features.map(feature => (
+              <li key={feature} className="flex items-center"><CheckCircle className="h-5 w-5 text-teal-500 mr-2" /> {feature}</li>
+            ))}
+          </ul>
+
+          <div className="mb-6">
+            <h3 className="font-bold text-xl mb-3 flex items-center"><MapPin className="h-5 w-5 mr-2 text-teal-500" /> Localização</h3>
+            <a href={mapLocationLink} target="_blank" rel="noopener noreferrer">
+              <img src={mapImageUrl} alt="Mapa da localização" className="rounded-lg w-full h-auto cursor-pointer hover:opacity-80 transition-opacity" />
+            </a>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button size="lg" className="flex-1" onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Calendar className="mr-2 h-4 w-4" /> Agendar Visita
+            </Button>
+            <Button size="lg" variant="outline" className="flex-1" asChild>
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                <MessageSquare className="mr-2 h-4 w-4" /> Falar no WhatsApp
+              </a>
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );
