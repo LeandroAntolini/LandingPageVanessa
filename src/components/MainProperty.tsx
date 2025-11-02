@@ -28,7 +28,7 @@ export const MainProperty = () => {
     { src: `${supabaseBaseUrl}/CET15.jpg`, title: "Churrasqueira" },
   ];
 
-  const mapImageUrl = `${supabaseBaseUrl}/map-location.png`;
+  const mapImageUrl = `${supabaseBaseUrl}/Mapa.jpg`;
   const mapLocationLink = "https://maps.app.goo.gl/818LZ2xZ8nxzFepP7";
 
   const [api, setApi] = useState<CarouselApi>();
