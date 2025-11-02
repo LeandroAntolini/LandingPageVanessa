@@ -18,8 +18,8 @@ export const MainProperty = () => {
   };
 
   const address = "Rua Deolindo Perim, 25, Praia de Itaparica, Vila Velha, ES";
-  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-  const mapEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(address)}`;
+  const mapLocationLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  const mapImageUrl = "/placeholder.svg"; // Using a generic placeholder image
 
   return (
     <section id="main-property" className="py-12 md:py-20 bg-gray-50">
@@ -53,24 +53,13 @@ export const MainProperty = () => {
             <div className="space-y-4">
               <h4 className="text-xl font-semibold">Localização</h4>
               <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border">
-                {googleMapsApiKey ? (
-                  <iframe
-                    src={mapEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Mapa de Localização do Imóvel"
-                  ></iframe>
-                ) : (
-                  <div className="bg-gray-200 flex items-center justify-center h-full">
-                    <p className="text-gray-600 text-center p-4">
-                      Para exibir o mapa, a chave da API do Google Maps precisa ser configurada.
-                    </p>
-                  </div>
-                )}
+                <a href={mapLocationLink} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={mapImageUrl}
+                    alt="Mapa da localização"
+                    className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                  />
+                </a>
               </div>
             </div>
           </CardContent>
