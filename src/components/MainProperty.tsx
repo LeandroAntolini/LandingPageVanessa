@@ -1,142 +1,146 @@
-"use client";
-
 import { useState, useEffect, useCallback } from "react";
-import { EmblaCarouselType } from "embla-carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Button } from "./ui/button";
-import { MapPin, BedDouble, Bath, Car, Ruler, PlayCircle } from "lucide-react";
-
-const items = [
-  { type: "image", src: "/images/apartamento1.jpeg" },
-  { type: "image", src: "/images/apartamento2.jpeg" },
-  { type: "image", src: "/images/apartamento3.jpeg" },
-  { type: "image", src: "/images/apartamento4.jpeg" },
-  { type: "image", src: "/images/apartamento5.jpeg" },
-  { type: "image", src: "/images/apartamento6.jpeg" },
-  { type: "video", src: "/images/apartamento1.jpeg", link: "https://www.instagram.com/reel/DN8yx55ETbi/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" },
-];
-
-type ThumbProps = {
-  selected: boolean;
-  item: { type: string; src: string };
-  onClick: () => void;
-};
-
-const EmblaCarouselThumbsButton = ({ selected, item, onClick }: ThumbProps) => (
-  <button
-    onClick={onClick}
-    className={`relative aspect-video h-20 w-full rounded-lg overflow-hidden transition-opacity ${selected ? "opacity-100" : "opacity-50 hover:opacity-75"}`}
-    type="button"
-  >
-    <img src={item.src} alt="Thumbnail" className="object-cover w-full h-full" />
-    {item.type === 'video' && (
-      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-        <PlayCircle className="h-8 w-8 text-white" />
-      </div>
-    )}
-  </button>
-);
+import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calendar, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const MainProperty = () => {
-  const [api, setApi] = useState<EmblaCarouselType | undefined>();
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
+  const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
+  
+  const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+  
+  const carouselImages = [
+    { src: `${supabaseBaseUrl}/CET01.jpg`, title: "Sala" },
+    { src: `${supabaseBaseUrl}/CET02.jpg`, title: "Sala" },
+    { src: `${supabaseBaseUrl}/CET03.jpg`, title: "Varanda" },
+    { src: `${supabaseBaseUrl}/CET04.jpg`, title: "Cozinha" },
+    { src: `${supabaseBaseUrl}/CET05.jpg`, title: "Homeoffice" },
+    { src: `${supabaseBaseUrl}/CET06.jpg`, title: "Suíte" },
+    { src: `${supabaseBaseUrl}/CET07.jpg`, title: "Banheiro suíte" },
+    { src: `${supabaseBaseUrl}/CET08.jpg`, title: "Quarto 1" },
+    { src: `${supabaseBaseUrl}/CET09.jpg`, title: "Quarto 2" },
+    { src: `${supabaseBaseUrl}/CET10.jpg`, title: "Banheiro social" },
+    { src: `${supabaseBaseUrl}/CET11.jpg`, title: "Piscina" },
+    { src: `${supabaseBaseUrl}/CET12.jpg`, title: "Academia" },
+    { src: `${supabaseBaseUrl}/CET13.jpg`, title: "Academia" },
+    { src: `${supabaseBaseUrl}/CET14.jpg`, title: "Quadra" },
+    { src: `${supabaseBaseUrl}/CET15.jpg`, title: "Churrasqueira" },
+  ];
 
-  const onThumbClick = useCallback((index: number) => {
-    if (!api) return;
-    api.scrollTo(index);
-  }, [api]);
+  const mapImageUrl = `${supabaseBaseUrl}/Mapa.jpg`;
+  const mapLocationLink = "https://maps.app.goo.gl/818LZ2xZ8nxzFepP7";
 
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setSelectedIndex(api.selectedScrollSnap());
-  }, [api, setSelectedIndex]);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (!api) return;
-    onSelect();
-    api.on("select", onSelect);
-    api.on("reInit", onSelect);
-  }, [api, onSelect]);
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+    return () => { api.off("select", () => setCurrent(api.selectedScrollSnap())) };
+  }, [api]);
 
-  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Ol%C3%A1%2C%20tenho%20interesse%20no%20im%C3%B3vel%20em%20Itapu%C3%A3%2C%20Vila%20Velha.%20Poderia%20me%20dar%20mais%20informa%C3%A7%C3%B5es%3F`;
+  const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
+  const openLightbox = (index: number) => setSelectedImageIndex(index);
+  const closeLightbox = () => setSelectedImageIndex(null);
+  const nextImage = () => selectedImageIndex !== null && setSelectedImageIndex((selectedImageIndex + 1) % carouselImages.length);
+  const prevImage = () => selectedImageIndex !== null && setSelectedImageIndex((selectedImageIndex - 1 + carouselImages.length) % carouselImages.length);
 
   return (
-    <main>
-      <section id="main-property" className="py-16 px-4 bg-white">
+    <>
+      <section id="main-property" className="py-16 px-4 bg-gray-50">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div>
             <Carousel setApi={setApi} className="w-full">
               <CarouselContent>
-                {items.map((item, index) => (
+                {carouselImages.map((image, index) => (
                   <CarouselItem key={index}>
-                    <Card className="border-none rounded-lg overflow-hidden">
-                      <CardContent className="flex aspect-video items-center justify-center p-0 relative">
-                        {item.type === 'video' ? (
-                          <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                            <img src={item.src} alt={`Vídeo do Apartamento`} className="object-cover w-full h-full" />
-                            <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer">
-                              <PlayCircle className="h-16 w-16 text-white" />
-                            </div>
-                          </a>
-                        ) : (
-                          <img src={item.src} alt={`Apartamento em Itapuã ${index + 1}`} className="object-cover w-full h-full" />
-                        )}
-                      </CardContent>
-                    </Card>
+                    <div className="relative group cursor-pointer" onClick={() => openLightbox(index)}>
+                      <img src={image.src} alt={image.title} className="w-full h-auto object-cover rounded-lg" />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <ZoomIn className="h-10 w-10 text-white" />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center rounded-b-lg">
+                        <p className="font-semibold text-sm">{image.title}</p>
+                      </div>
+                    </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
+              <CarouselPrevious className="hidden sm:flex" />
+              <CarouselNext className="hidden sm:flex" />
             </Carousel>
-            <div className="grid grid-cols-4 gap-2 mt-4">
-              {items.map((item, index) => (
-                <EmblaCarouselThumbsButton
-                  key={index}
-                  onClick={() => onThumbClick(index)}
-                  selected={index === selectedIndex}
-                  item={item}
-                />
+            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 mt-4">
+              {carouselImages.map((image, index) => (
+                <button key={index} onClick={() => scrollTo(index)} className={`rounded-md overflow-hidden border-2 transition ${current === index ? 'border-teal-500' : 'border-transparent opacity-60 hover:opacity-100'}`}>
+                  <img src={image.src} alt={`Thumbnail ${image.title}`} className="w-full h-full object-cover aspect-video" />
+                </button>
               ))}
             </div>
           </div>
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-gray-800">Apartamento de Luxo em Itapuã, Vila Velha</h1>
-            <div className="flex items-center text-gray-600">
-              <MapPin className="h-5 w-5 mr-2 text-teal-500" />
-              <span>Itapuã, Vila Velha - ES</span>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Apartamento na Praia de Itaparica</h2>
+            <p className="text-gray-600 mb-4 text-lg">Valor <span className="text-teal-500 font-bold">R$ 1.200.000,00</span></p>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
+              <div className="p-2 rounded-lg bg-gray-100"><BedDouble className="mx-auto mb-1" /> 3 Quartos</div>
+              <div className="p-2 rounded-lg bg-gray-100"><Bath className="mx-auto mb-1" /> 1 Suíte</div>
+              <div className="p-2 rounded-lg bg-gray-100"><Car className="mx-auto mb-1" /> 2 Vagas</div>
+              <div className="p-2 rounded-lg bg-gray-100"><Ruler className="mx-auto mb-1" /> 120 m²</div>
             </div>
-            <p className="text-gray-700 leading-relaxed">
-              Este incrível apartamento de 3 quartos, sendo 1 suíte, oferece o máximo de conforto e sofisticação. Com uma localização privilegiada em Itapuã, você estará perto de tudo o que precisa: praias, comércios, restaurantes e muito mais. O imóvel conta com acabamentos de alto padrão, lazer completo e uma vista deslumbrante.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <BedDouble className="h-8 w-8 mx-auto text-teal-500 mb-2" />
-                <span className="font-semibold">3 Quartos</span>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <Bath className="h-8 w-8 mx-auto text-teal-500 mb-2" />
-                <span className="font-semibold">2 Banheiros</span>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <Car className="h-8 w-8 mx-auto text-teal-500 mb-2" />
-                <span className="font-semibold">2 Vagas</span>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <Ruler className="h-8 w-8 mx-auto text-teal-500 mb-2" />
-                <span className="font-semibold">110 m²</span>
-              </div>
+
+            <h3 className="font-bold text-xl mb-3">Diferenciais</h3>
+            <ul className="space-y-2 mb-6">
+              {features.map(feature => (
+                <li key={feature} className="flex items-center"><CheckCircle className="h-5 w-5 text-teal-500 mr-2" /> {feature}</li>
+              ))}
+            </ul>
+
+            <div className="mb-6">
+              <h3 className="font-bold text-xl mb-3 flex items-center"><MapPin className="h-5 w-5 mr-2 text-teal-500" /> Localização</h3>
+              <a href={mapLocationLink} target="_blank" rel="noopener noreferrer">
+                <img src={mapImageUrl} alt="Mapa da localização" className="rounded-lg w-full h-auto cursor-pointer hover:opacity-80 transition-opacity" />
+              </a>
             </div>
-            <div className="pt-4">
-              <h3 className="text-xl font-semibold mb-2">Valor: R$ 980.000,00</h3>
-              <Button asChild size="lg" className="w-full bg-teal-500 hover:bg-teal-600">
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button size="lg" className="flex-1" onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}>
+                <Calendar className="mr-2 h-4 w-4" /> Agendar Visita
+              </Button>
+              <Button size="lg" variant="outline" className="flex-1" asChild>
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                  Agendar Visita pelo WhatsApp
+                  <MessageSquare className="mr-2 h-4 w-4" /> Falar no WhatsApp
                 </a>
               </Button>
             </div>
           </div>
         </div>
       </section>
-    </main>
+
+      <Dialog open={selectedImageIndex !== null} onOpenChange={(isOpen) => !isOpen && closeLightbox()}>
+        <DialogContent className="max-w-5xl p-0 border-0 bg-transparent shadow-none">
+          {selectedImageIndex !== null && (
+            <div className="relative">
+              <img 
+                src={carouselImages[selectedImageIndex].src} 
+                alt={carouselImages[selectedImageIndex].title} 
+                className="w-full h-auto object-contain max-h-[90vh] rounded-lg" 
+              />
+              <Button variant="ghost" size="icon" className="absolute top-1/2 -translate-y-1/2 left-2 text-white bg-black/50 hover:bg-black/75 rounded-full" onClick={prevImage}>
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+              <Button variant="ghost" size="icon" className="absolute top-1/2 -translate-y-1/2 right-2 text-white bg-black/50 hover:bg-black/75 rounded-full" onClick={nextImage}>
+                <ChevronRight className="h-6 w-6" />
+              </Button>
+              <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center rounded-b-lg">
+                <p className="font-semibold">{carouselImages[selectedImageIndex].title}</p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
