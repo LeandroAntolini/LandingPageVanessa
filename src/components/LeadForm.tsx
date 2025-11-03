@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLocation } from "react-router-dom";
 import { trackLead } from "@/lib/meta-pixel";
 import { showSuccess, showError } from "@/utils/toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Nome deve ter pelo menos 2 caracteres." }),
@@ -27,7 +28,7 @@ export const LeadForm = () => {
     defaultValues: { name: "", whatsapp: "", interest: "", message: "", lgpd: false },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const searchParams = new URLSearchParams(location.search);
     const utms = {
       utm_source: searchParams.get('utm_source'),
@@ -39,14 +40,17 @@ export const LeadForm = () => {
 
     const dataToSend = { ...values, ...utms };
     
-    console.log("Dados do Lead:", dataToSend);
-    // TODO: Substituir o console.log pelo envio para o webhook/Google Sheets
-    // Ex: fetch('{{WEBHOOK_URL}}', { method: 'POST', body: JSON.stringify(dataToSend) });
+    const { error } = await supabase.from('leads').insert([dataToSend]);
 
-    // Dispara o evento de Lead para o Meta Pixel
-    trackLead();
-    showSuccess("Contato enviado com sucesso! Em breve retornarei.");
-    form.reset();
+    if (error) {
+      console.error("Erro ao enviar lead:", error);
+      showError("Ocorreu um erro ao enviar seu contato. Tente novamente.");
+    } else {
+      // Dispara o evento de Lead para o Meta Pixel
+      trackLead();
+      showSuccess("Contato enviado com sucesso! Em breve retornarei.");
+      form.reset();
+    }
   }
 
   return (
