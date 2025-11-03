@@ -8,7 +8,7 @@ const testimonials = [
 
 export const SocialProof = () => {
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-white">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">O que meus clientes dizem</h2>
         <div className="grid md:grid-cols-2 gap-8 mb-12">

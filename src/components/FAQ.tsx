@@ -9,7 +9,7 @@ const faqItems = [
 
 export const FAQ = () => {
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-white">
       <div className="container mx-auto max-w-3xl">
         <h2 className="text-3xl font-bold text-center mb-8">Perguntas Frequentes</h2>
         <Accordion type="single" collapsible className="w-full">

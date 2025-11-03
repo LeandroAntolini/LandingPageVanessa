@@ -50,7 +50,7 @@ export const MainProperty = () => {
 
   return (
     <>
-      <section id="main-property" className="py-16 px-4 bg-gray-50">
+      <section id="main-property" className="py-16 px-4 bg-white">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div>
             <Carousel setApi={setApi} className="w-full">
