@@ -13,7 +13,7 @@ export const PropertyCard = ({ property }: { property: Property }) => {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
-        <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
+        <img src="/ITO12.jpg" alt={property.title} className="w-full h-48 object-cover" />
       </CardHeader>
       <CardContent className="p-4">
         <h3 className="font-bold text-lg">{property.title}</h3>
