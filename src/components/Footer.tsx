@@ -1,8 +1,7 @@
-import { Instagram, Linkedin, Star } from "lucide-react";
+import { Instagram, Linkedin, Star, Phone, MessageSquare } from "lucide-react";
+import { WHATSAPP_LINK_DEFAULT, CALL_LINK } from "@/lib/constants";
 
 export const Footer = () => {
-  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225`;
-  
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/vanessatapias.corretora/", label: "Instagram" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/vanessa-da-silva-t%C3%A1pias-antolini/", label: "LinkedIn" },
@@ -31,13 +30,21 @@ export const Footer = () => {
           ))}
         </div>
         
-        <p className="my-4">
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors">
-            WhatsApp: (27) 99903-9225
-          </a>
-        </p>
+        {/* Contact Info */}
+        <div className="space-y-2 my-4">
+          <p className="flex items-center justify-center">
+            <a href={CALL_LINK} className="hover:text-teal-400 transition-colors flex items-center">
+              <Phone className="h-4 w-4 mr-2" /> Telefone: +55 (27) 99903-9225
+            </a>
+          </p>
+          <p className="flex items-center justify-center">
+            <a href={WHATSAPP_LINK_DEFAULT} target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors flex items-center">
+              <MessageSquare className="h-4 w-4 mr-2" /> WhatsApp: (27) 99903-9225
+            </a>
+          </p>
+        </div>
         
-        <p className="text-gray-400">
+        <p className="text-gray-400 mt-4">
           © {new Date().getFullYear()} Vanessa Tápias. Todos os direitos reservados.
         </p>
         <div className="mt-4">

@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calendar, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
+import { BedDouble, Bath, Car, Ruler, MapPin, CheckCircle, MessageSquare, Calendar, ZoomIn, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { WHATSAPP_LINK_PROPERTY, CALL_LINK } from "@/lib/constants";
 
 export const MainProperty = () => {
-  const whatsappLink = `https://api.whatsapp.com/send?phone=5527999039225&text=Olá, Vanessa! Tenho interesse no imóvel da Praia de Itaparica.`;
   const features = ["Lazer completo com piscina e sauna", "Localização privilegiada", "Salão de festa e salão gourmet", "Academia"];
   
   const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
@@ -110,8 +110,13 @@ export const MainProperty = () => {
                 <Calendar className="mr-2 h-4 w-4" /> Agendar Visita
               </Button>
               <Button size="lg" variant="outline" className="flex-1" asChild>
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                <a href={WHATSAPP_LINK_PROPERTY} target="_blank" rel="noopener noreferrer">
                   <MessageSquare className="mr-2 h-4 w-4" /> Falar no WhatsApp
+                </a>
+              </Button>
+              <Button size="lg" variant="secondary" className="flex-1" asChild>
+                <a href={CALL_LINK}>
+                  <Phone className="mr-2 h-4 w-4" /> Ligar Agora
                 </a>
               </Button>
             </div>
