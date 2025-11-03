@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { trackLead } from "@/lib/meta-pixel";
 import { showSuccess, showError } from "@/utils/toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -90,7 +90,12 @@ export const LeadForm = () => {
               <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                 <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} /></FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>Autorizo o contato conforme a Política de Privacidade.</FormLabel>
+                  <FormLabel>
+                    Autorizo o contato conforme a{' '}
+                    <Link to="/politica-de-privacidade" className="underline hover:text-teal-500" target="_blank" rel="noopener noreferrer">
+                      Política de Privacidade
+                    </Link>.
+                  </FormLabel>
                 </div>
               </FormItem>
             )} />
