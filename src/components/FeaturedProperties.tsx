@@ -2,7 +2,7 @@ import { PropertyCard } from "./PropertyCard";
 
 const properties = [
   {
-    title: "Itaparica Top Life",
+    title: "Itaparica ON",
     description: "2 quartos, 1 suíte, lazer completo e perto de tudo que você precisa.",
     image: "/images/ITO00.jpg",
     link: "#lead-form",
