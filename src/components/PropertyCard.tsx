@@ -1,31 +1,28 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 interface Property {
-  image: string;
-  price: string;
-  neighborhood: string;
+  id: number;
   title: string;
+  description: string;
+  price: string;
+  image: string;
 }
 
-export const PropertyCard = ({ property }: { property: Property }) => {
+interface PropertyCardProps {
+  property: Property;
+}
+
+export function PropertyCard({ property }: PropertyCardProps) {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden">
       <CardHeader className="p-0">
-        <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
+        <img src="/ITO12.jpg" alt={property.title} className="w-full h-48 object-cover" />
       </CardHeader>
       <CardContent className="p-4">
         <h3 className="font-bold text-lg">{property.title}</h3>
-        <p className="text-teal-500 font-semibold text-xl my-2">{property.price}</p>
-        <div className="flex items-center text-sm text-gray-500">
-          <MapPin className="h-4 w-4 mr-1" />
-          <span>{property.neighborhood}</span>
-        </div>
+        <p className="text-sm text-gray-600">{property.description}</p>
+        <p className="font-bold text-lg mt-2">{property.price}</p>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Button className="w-full" variant="outline">Detalhes</Button>
-      </CardFooter>
     </Card>
   );
-};
+}
