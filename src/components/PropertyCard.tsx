@@ -9,11 +9,16 @@ interface Property {
   title: string;
 }
 
+const supabaseBaseUrl = "https://frihyrxavhecjrhifyot.supabase.co/storage/v1/object/public/property_images";
+
 export const PropertyCard = ({ property }: { property: Property }) => {
+  // Usando a imagem ITO12.jpg do Supabase para todos os cards similares
+  const imageUrl = `${supabaseBaseUrl}/ITO12.jpg`;
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
-        <img src="/ITO12.jpg" alt="Itaparica ON" className="w-full h-48 object-cover" />
+        <img src={imageUrl} alt="Itaparica ON" className="w-full h-48 object-cover" />
       </CardHeader>
       <CardContent className="p-4">
         <h3 className="font-bold text-lg">Itaparica ON</h3>
