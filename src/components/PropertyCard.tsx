@@ -13,10 +13,10 @@ export const PropertyCard = ({ property }: { property: Property }) => {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
-        <img src="/ITO12.jpg" alt={property.title} className="w-full h-48 object-cover" />
+        <img src="/ITO12.jpg" alt="Itaparica ON" className="w-full h-48 object-cover" />
       </CardHeader>
       <CardContent className="p-4">
-        <h3 className="font-bold text-lg">{property.title}</h3>
+        <h3 className="font-bold text-lg">Itaparica ON</h3>
         <p className="text-teal-500 font-semibold text-xl my-2">{property.price}</p>
         <div className="flex items-center text-sm text-gray-500">
           <MapPin className="h-4 w-4 mr-1" />
